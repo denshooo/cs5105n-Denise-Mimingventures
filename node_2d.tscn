@@ -1,9 +1,215 @@
 [gd_scene format=3 uid="uid://cbjswf4xijx3x"]
 
-[ext_resource type="Texture2D" uid="uid://cbb0ia8glt8xf" path="res://e38c06340f95c0345d0202978ea10d94-removebg-preview.png" id="1_wtcfe"]
+[ext_resource type="Script" uid="uid://cudng8t45msot" path="res://node_2d.gd" id="1_d21ai"]
+[ext_resource type="Texture2D" uid="uid://48f1bpoukbav" path="res://93eac61f2721daa1845b714058afedd2.jpg" id="1_kdubu"]
+[ext_resource type="Script" uid="uid://ck0s7yhiv4f41" path="res://player.gd" id="1_q6r6c"]
+[ext_resource type="Texture2D" uid="uid://brs8qt40tje1y" path="res://download__31_-removebg-preview.png" id="3_d21ai"]
+[ext_resource type="Texture2D" uid="uid://bcvwi8ishswfs" path="res://Fish.png" id="3_rj586"]
+[ext_resource type="PackedScene" uid="uid://ctbxlnfaoyg4l" path="res://item.tscn" id="4_0hol4"]
+[ext_resource type="Texture2D" uid="uid://7ebv4poh2oor" path="res://trash.png" id="4_4d7sh"]
+[ext_resource type="Texture2D" uid="uid://ercstjvaod7e" path="res://3.png" id="4_nr8wp"]
+[ext_resource type="Texture2D" uid="uid://c7c0gk4h1yhu3" path="res://1.png" id="5_d2bti"]
+[ext_resource type="Script" uid="uid://c7rx7ll25rgmm" path="res://ui.gd" id="6_kdubu"]
+[ext_resource type="Texture2D" uid="uid://jbf6n1xtecur" path="res://2.png" id="6_ta5nu"]
+[ext_resource type="Texture2D" uid="uid://d2fxe8t2k2ehy" path="res://4.png" id="8_flf07"]
+[ext_resource type="Texture2D" uid="uid://couatm8q1vkqn" path="res://5.png" id="9_k73cj"]
+[ext_resource type="Texture2D" uid="uid://bcjd5p03nosxy" path="res://bone.png" id="10_rjqkl"]
+[ext_resource type="Script" uid="uid://bn603xki6mhf2" path="res://touch_controls.gd" id="15_d2bti"]
 
-[node name="Node2D" type="Node2D" unique_id=198136310]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_b0rrv"]
+size = Vector2(118, 88)
 
-[node name="Sprite2D" type="Sprite2D" parent="." unique_id=61356749]
-position = Vector2(576, 324)
-texture = ExtResource("1_wtcfe")
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_eg316"]
+size = Vector2(122, 46.5)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_nr8wp"]
+bg_color = Color(0.80814105, 0, 0.010622745, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0, 0, 0, 1)
+
+[node name="Main" type="Node2D" unique_id=198136310]
+script = ExtResource("1_d21ai")
+item_scene = ExtResource("4_0hol4")
+treat_textures = Array[Texture2D]([ExtResource("3_rj586"), ExtResource("4_nr8wp"), ExtResource("5_d2bti"), ExtResource("6_ta5nu")])
+hazard_textures = Array[Texture2D]([ExtResource("4_4d7sh"), ExtResource("8_flf07"), ExtResource("9_k73cj"), ExtResource("10_rjqkl")])
+
+[node name="Background" type="Sprite2D" parent="." unique_id=953016605]
+position = Vector2(-2.25, -1.5935974)
+scale = Vector2(0.96541655, 0.93453753)
+texture = ExtResource("1_kdubu")
+centered = false
+
+[node name="Player" type="CharacterBody2D" parent="." unique_id=938217973]
+position = Vector2(26, -71)
+script = ExtResource("1_q6r6c")
+
+[node name="Sprite2D" type="Sprite2D" parent="Player" unique_id=61356749]
+position = Vector2(33, 557)
+scale = Vector2(0.25800005, 0.23903307)
+texture = ExtResource("3_d21ai")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Player" unique_id=456627507]
+position = Vector2(33, 557)
+shape = SubResource("RectangleShape2D_b0rrv")
+
+[node name="CatchZone" type="Area2D" parent="Player" unique_id=1339116203]
+position = Vector2(89, 494)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Player/CatchZone" unique_id=521105800]
+position = Vector2(-56, 45)
+shape = SubResource("RectangleShape2D_eg316")
+
+[node name="UI" type="CanvasLayer" parent="." unique_id=1086810374]
+script = ExtResource("6_kdubu")
+
+[node name="ScoreLabel" type="Label" parent="UI" unique_id=1678579854]
+anchors_preset = -1
+anchor_left = 0.10700001
+anchor_top = 0.091000006
+anchor_right = 0.10700001
+anchor_bottom = 0.091000006
+offset_left = -123.26401
+offset_top = -58.968002
+offset_right = -83.26401
+offset_bottom = -35.968002
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 40
+
+[node name="LivesLabel" type="Label" parent="UI" unique_id=545797682]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -1.0
+offset_bottom = 23.0
+grow_horizontal = 0
+theme_override_font_sizes/font_size = 40
+horizontal_alignment = 2
+
+[node name="GameOverPanel" type="Panel" parent="UI" unique_id=226995030]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -125.0
+offset_top = -86.5
+offset_right = 125.0
+offset_bottom = 86.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UI/GameOverPanel" unique_id=1308343637]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TitleLabel" type="Label" parent="UI/GameOverPanel/VBoxContainer" unique_id=843764676]
+layout_mode = 2
+text = "Game Over
+"
+
+[node name="ScoreResult" type="Label" parent="UI/GameOverPanel/VBoxContainer" unique_id=2064708052]
+layout_mode = 2
+
+[node name="HighScoreResult" type="Label" parent="UI/GameOverPanel/VBoxContainer" unique_id=493610720]
+layout_mode = 2
+
+[node name="TryAgainButton" type="Button" parent="UI/GameOverPanel/VBoxContainer" unique_id=1930416241]
+layout_mode = 2
+text = "Try Again"
+
+[node name="LevelLabel" type="Label" parent="UI" unique_id=1816792347]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -20.0
+offset_right = 20.0
+offset_bottom = 23.0
+grow_horizontal = 2
+theme_override_font_sizes/font_size = 40
+
+[node name="PausePanel" type="Panel" parent="UI" unique_id=497545358]
+custom_minimum_size = Vector2(320, 240)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -160.0
+offset_top = -120.0
+offset_right = 160.0
+offset_bottom = 120.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UI/PausePanel" unique_id=425243513]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_bottom = -140.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="PauseTitle" type="Label" parent="UI/PausePanel/VBoxContainer" unique_id=1751853035]
+layout_mode = 2
+text = "Paused"
+horizontal_alignment = 1
+
+[node name="ResumeButton" type="Button" parent="UI/PausePanel/VBoxContainer" unique_id=362925900]
+layout_mode = 2
+text = "Resume
+"
+
+[node name="MuteButton" type="Button" parent="UI/PausePanel/VBoxContainer" unique_id=1199396235]
+layout_mode = 2
+text = "Mute
+"
+
+[node name="HungerBar" type="ProgressBar" parent="UI" unique_id=1466484611]
+custom_minimum_size = Vector2(250, 24)
+offset_left = 1.0
+offset_top = 60.0
+offset_right = 251.0
+offset_bottom = 87.0
+theme_override_styles/fill = SubResource("StyleBoxFlat_nr8wp")
+show_percentage = false
+
+[node name="TouchControls" type="Control" parent="UI" unique_id=1731145360]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("15_d2bti")
+
+[node name="LeftButton" type="Button" parent="UI/TouchControls" unique_id=1767733750]
+layout_mode = 0
+offset_left = 388.0
+offset_top = 522.0
+offset_right = 458.0
+offset_bottom = 600.0
+text = "<"
+
+[node name="RightButton" type="Button" parent="UI/TouchControls" unique_id=1642514689]
+layout_mode = 0
+offset_left = 639.0
+offset_top = 527.0
+offset_right = 712.0
+offset_bottom = 601.0
+text = ">"
+
+[node name="PauseButton" type="Button" parent="UI/TouchControls" unique_id=1003033357]
+layout_mode = 0
+offset_left = 1036.0
+offset_top = 518.0
+offset_right = 1140.0
+offset_bottom = 622.0
+text = "⏸"
+
+[node name="SpawnTimer" type="Timer" parent="." unique_id=350075564]
