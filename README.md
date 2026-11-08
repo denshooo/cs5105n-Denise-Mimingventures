@@ -25,4 +25,17 @@ Week 5: Added a simple HUD and pause, resume, and mute accessibility feature
 
 <img width="590" height="342" alt="image" src="https://github.com/user-attachments/assets/77875050-b259-4ac6-9900-cdfbe9e1ada7" />
 
+Week 6: Added hunger bar (Keep the cat fed by catching treats, because an empty hunger bar costs a life, and poisonous hazards make it drain even faster.)
+
+<img width="199" height="100" alt="image" src="https://github.com/user-attachments/assets/b1cfa2b0-4247-4480-995e-cbca41a320b1" />
+<img width="255" height="65" alt="image" src="https://github.com/user-attachments/assets/d5ec2164-391a-4480-b0d7-fe907ae546a8" />
+
+Week 7: Saving high score in the game
+
+save_high_score() writes the high score to a file (user://highscore.save) when a game ends with a new record, and load_high_score() reads it back when the game starts. So the high score survives closing and reopening the game, on that computer.
+<img width="303" height="71" alt="image" src="https://github.com/user-attachments/assets/c16b410b-8e26-4716-85f9-a74efff91228" />
+<img width="231" height="155" alt="image" src="https://github.com/user-attachments/assets/583568b7-9cdb-4833-8a76-d3b294fe7698" />
+
+
+
 
